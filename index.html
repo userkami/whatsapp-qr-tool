@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <!-- Primary Meta Tags -->
+  <title>WhatsApp Link & QR Code Generator – Free, No Login</title>
+  <meta name="title" content="WhatsApp Link & QR Code Generator – Free, No Login">
+  <meta name="description" content="Create a clickable WhatsApp chat link and scannable QR code in seconds. No signup. Works worldwide with custom messages. Free forever.">
+  <meta name="keywords" content="whatsapp qr code, whatsapp link generator, qr code generator, wa.me link, whatsapp business tool, chat link, business qr">
+  <meta name="author" content="WhatsApp QR Tool">
+  <meta name="robots" content="index, follow">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://waqrtool.com/">
+  <meta property="og:title" content="WhatsApp Link & QR Code Generator – Free, No Login">
+  <meta property="og:description" content="Create a clickable WhatsApp chat link and scannable QR code in seconds. No signup. Works worldwide with custom messages. Free forever.">
+  <meta property="og:image" content="https://waqrtool.com/preview.jpg" alt="WhatsApp QR Code Generator Tool Screenshot">
+  <meta property="og:site_name" content="WhatsApp QR Tool">
+  
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://waqrtool.com/">
+  <meta property="twitter:title" content="WhatsApp Link & QR Code Generator – Free, No Login">
+  <meta property="twitter:description" content="Create a clickable WhatsApp chat link and scannable QR code in seconds. No signup. Works worldwide with custom messages. Free forever.">
+  <meta property="twitter:image" content="https://waqrtool.com/preview.jpg">
+  
+  <!-- Additional SEO -->
+  <link rel="canonical" href="https://waqrtool.com/">
+  <meta name="theme-color" content="#25D366">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'GA_MEASUREMENT_ID');
+  </script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    body {
+      background: #f9f9f9;
+      color: #333;
+      padding: 20px;
+      max-width: 800px;
+      margin: auto;
+      line-height: 1.6;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+      color: #25D366;
+    }
+    .subtitle {
+      color: #666;
+      margin-bottom: 20px;
+    }
+    .tool {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      margin-bottom: 30px;
+    }
+    input, textarea, button {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0;
+      border-radius: 6px;
+      border: 1px solid #ddd;
+    }
+    button {
+      background: #25D366;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      border: none;
+    }
+    button:hover {
+      background: #128C7E;
+    }
+    .output {
+      margin-top: 20px;
+      text-align: center;
+    }
+    #qr-code {
+      margin: 15px auto;
+      max-width: 200px;
+    }
+    .actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .actions button {
+      flex: 1;
+      min-width: 120px;
+    }
+    .locked {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+    section {
+      margin: 40px 0;
+    }
+    h2 {
+      margin-bottom: 15px;
+      color: #25D366;
+    }
+    .benefits-grid, .use-case-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    .benefit, .use-case {
+      background: white;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 1px 5px rgba(0,0,0,0.05);
+    }
+    details {
+      background: white;
+      padding: 15px;
+      margin-bottom: 10px;
+      border-radius: 8px;
+      box-shadow: 0 1px 5px rgba(0,0,0,0.05);
+    }
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      color: #888;
+      font-size: 0.9rem;
+      padding: 20px 0;
+      border-top: 1px solid #eee;
+    }
+    footer a {
+      color: #25D366;
+      text-decoration: none;
+      margin: 0 5px;
+    }
+    footer a:hover {
+      text-decoration: underline;
+    }
+    .modal {
+      position: fixed;
+      top: 20%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+      z-index: 1000;
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+    }
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.5);
+      display: none;
+    }
+    .close-modal {
+      position: absolute;
+      top: 10px; right: 15px;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+    .ad-placeholder {
+      background: #e8f4f8;
+      border-left: 4px solid #25D366;
+      padding: 15px;
+      margin: 20px 0;
+      border-radius: 4px;
+      font-size: 0.9rem;
+    }
+    .ad-placeholder a {
+      color: #128C7E;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .ad-placeholder a:hover {
+      text-decoration: underline;
+    }
+    .cookie-banner {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #333;
+      color: white;
+      padding: 15px;
+      text-align: center;
+      display: none;
+      z-index: 1000;
+    }
+    .cookie-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+    }
+    .cookie-btn {
+      background: #25D366;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .cookie-link {
+      color: #25D366;
+      text-decoration: none;
+    }
+    .cookie-link:hover {
+      text-decoration: underline;
+    }
+    @media (max-width: 600px) {
+      .actions {
+        flex-direction: column;
+      }
+      
+      .cookie-content {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+  </style>
+  
+ <!-- FAQ Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Does the WhatsApp link work without saving the number?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes! The link opens a chat directly in WhatsApp, even if the number isn't saved in the phone. This makes it perfect for sharing your contact information quickly and easily."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I add a custom message?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Absolutely! Type a message like 'Hi, I saw your ad' and it will pre-fill in WhatsApp. This helps you start conversations with context and saves time for both you and your contacts."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is this free to use?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, forever. No login, no hidden costs, no premium features locked behind paywalls. We believe useful tools should be accessible to everyone."
+        }
+      }
+    ]
+  }
+  </script>
+  
+  <!-- Breadcrumb Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [{
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://yourdomain.com/"
+    }]
+  }
+  </script>
+  
+  
+  
+  
+</head>
+<body>
+
+  <!-- Cookie Consent Banner -->
+  <div id="cookie-banner" class="cookie-banner">
+    <div class="cookie-content">
+      <p>We use cookies to improve your experience and for analytics. By using our site, you agree to our use of cookies.</p>
+      <button onclick="acceptCookies()" class="cookie-btn">Accept</button>
+      <a href="privacy-policy.html" class="cookie-link">Learn more</a>
+    </div>
+  </div>
+
+  <header>
+    <h1>WhatsApp Link & QR Code Generator</h1>
+    <p class="subtitle">Create a clickable WhatsApp chat link and scannable QR code — instantly, no signup</p>
+  </header>
+
+  <!-- Ad Placeholder 1: Top of Tool -->
+  <div class="ad-placeholder">
+    💼 <strong>Need WhatsApp Marketing Tools?</strong> Check out <a href="https://example-affiliate.com/whatsapp-suite" target="_blank">WhatsApp Business Suite</a> - 30% off with code <strong>QR30</strong>
+  </div>
+
+  <section class="tool">
+    <label>📞 Phone Number (with country code)</label>
+    <input type="tel" id="phone" placeholder="e.g., 1234567890">
+
+    <label>💬 Pre-filled Message (Optional)</label>
+    <textarea id="message" placeholder="e.g., Hi, I saw your ad on..."></textarea>
+
+    <button onclick="generateLink()">Generate Link & QR</button>
+
+    <div class="output">
+      <div id="link-output"></div>
+      <div id="qr-code"></div>
+      <div class="actions">
+        <button onclick="copyLink()">📋 Copy Link</button>
+        <button onclick="downloadQR()">💾 Download QR (PNG)</button>
+        <button class="locked" onclick="showPremiumModal('logo')">🖼️ Add Logo (Premium)</button>
+        <button class="locked" onclick="showPremiumModal('svg')">📐 Download SVG (Premium)</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ad Placeholder 2: After Tool -->
+  <div class="ad-placeholder">
+    📱 <strong>Want to Track QR Scans?</strong> Try <a href="https://example-affiliate.com/qr-analytics" target="_blank">QR Track Pro</a> - See who scans your codes in real-time
+  </div>
+
+  <section class="benefits">
+    <h2>Why Use a WhatsApp Link or QR Code?</h2>
+    <p>Connecting with people should be fast and easy. A WhatsApp link or QR code removes friction and turns curiosity into conversation — instantly.</p>
+
+    <div class="benefits-grid">
+      <div class="benefit">
+        <h3>🚀 Instant Communication</h3>
+        <p>No saving numbers or typing messages. Tap or scan → chat starts immediately.</p>
+      </div>
+      <div class="benefit">
+        <h3>📱 Works on Any Device</h3>
+        <p>Works on iPhones, Android, tablets, and desktop — anyone with WhatsApp can use it.</p>
+      </div>
+      <div class="benefit">
+        <h3>🌐 Bridging Online & Offline</h3>
+        <p>Put a QR code on a poster, menu, or business card — and bring offline audiences into digital conversation.</p>
+      </div>
+      <div class="benefit">
+        <h3>📈 Great for Business</h3>
+        <p>Perfect for customer support, sales, bookings, and marketing. Reduce response time and increase engagement.</p>
+      </div>
+      <div class="benefit">
+        <h3>🔒 No Spam, No Bots</h3>
+        <p>Unlike public groups or forms, WhatsApp keeps chats personal and secure.</p>
+      </div>
+      <div class="benefit">
+        <h3>🎁 Free & Easy to Use</h3>
+        <p>No cost, no login, no setup. Just generate and share — in seconds.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ad Placeholder 3: Before FAQ -->
+  <div class="ad-placeholder">
+    🛠️ <strong>Need Custom QR Solutions?</strong> Visit <a href="https://example-affiliate.com/custom-qr" target="_blank">CustomQR Studio</a> - Design branded QR codes for your business
+  </div>
+
+  <section class="use-cases">
+    <h2>Use It For</h2>
+    <div class="use-case-grid">
+      <div class="use-case">
+        <h3>📱 Business Cards</h3>
+        <p>Put the QR on your card. Clients scan → chat instantly. No typing numbers.</p>
+      </div>
+      <div class="use-case">
+        <h3>📍 Instagram Bio</h3>
+        <p>Replace "DM me" with a WhatsApp link. Example: <code>wa.me/1234567890</code></p>
+      </div>
+      <div class="use-case">
+        <h3>🖨️ Flyers & Posters</h3>
+        <p>Add a QR code so people can message you right from the street.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq">
+  <h2>WhatsApp QR Code Generator FAQ | WhatsApp Link Builder</h2>
+   
+  <div class="faq-item">
+    <div class="faq-question">
+      <h3>Does the WhatsApp link work without saving the number?</h3>
+    </div>
+    <div class="faq-answer">
+      <p>Yes! The link opens a chat directly in WhatsApp, even if the number isn't saved in the phone. This makes it perfect for sharing your contact information quickly and easily.</p>
+    </div>
+  </div>
+  
+  <div class="faq-item">
+    <div class="faq-question">
+      <h3>Can I add a custom message?</h3>
+    </div>
+    <div class="faq-answer">
+      <p>Absolutely! Type a message like "Hi, I saw your ad" and it will pre-fill in WhatsApp. This helps you start conversations with context and saves time for both you and your contacts.</p>
+    </div>
+  </div>
+  
+  <div class="faq-item">
+    <div class="faq-question">
+      <h3>Is this free to use?</h3>
+    </div>
+    <div class="faq-answer">
+      <p>Yes, forever. No login, no hidden costs, no premium features locked behind paywalls. We believe useful tools should be accessible to everyone.</p>
+    </div>
+  </div>
+  
+  <div class="faq-item">
+    <div class="faq-question">
+      <h3>Will the QR code expire?</h3>
+    </div>
+    <div class="faq-answer">
+      <p>No. Once generated, the QR code is static and will work forever. You can print it on business cards, flyers, or websites without worrying about it breaking.</p>
+    </div>
+  </div>
+  
+  <div class="faq-item">
+    <div class="faq-question">
+      <h3>How do I scan the QR code?</h3>
+    </div>
+    <div class="faq-answer">
+      <p>Simply open your phone's camera app or any QR scanner app and point it at the QR code. Most modern smartphones can scan QR codes directly with their camera without needing a separate app.</p>
+    </div>
+  </div>
+  
+  <div class="faq-item">
+    <div class="faq-question">
+      <h3>Can I use this for my business?</h3>
+    </div>
+    <div class="faq-answer">
+      <p>Definitely! This tool is perfect for businesses, freelancers, and entrepreneurs. Add the QR code to your business cards, websites, social media profiles, or marketing materials to make it easy for customers to reach you.</p>
+    </div>
+  </div>
+</section>
+
+  <footer>
+  <div class="related-tools">
+  <h3>Related Tools</h3>
+  <ul>
+    <li><a href="#tool">WhatsApp Link Generator</a></li>
+    <li><a href="#tool">Business QR Code Maker</a></li>
+    <li><a href="#tool">Contact QR Generator</a></li>
+  </ul>
+</div>
+  
+    &copy; 2025 WhatsApp QR Tool | Free Forever<br>
+    <a href="privacy-policy.html">Privacy Policy</a> | 
+    <a href="terms-of-use.html">Terms of Use</a> | 
+    <a href="disclaimer.html">Disclaimer</a> | 
+    <a href="mailto:contact@yourdomain.com">Contact</a>
+  </footer>
+
+  <!-- Premium Modal -->
+  <div class="modal-overlay" id="modal-overlay" onclick="closeModal()">
+    <div class="modal">
+      <span class="close-modal" onclick="closeModal()">&times;</span>
+      <h3>✨ Premium Feature</h3>
+      <p id="modal-text">Unlock this feature with Premium access.</p>
+      <p><strong>$5 one-time / Lifetime access</strong></p>
+      <a href="https://gumroad.com/l/YOUR_PRODUCT" target="_blank" class="btn" onclick="trackPremiumClick()">Upgrade Now</a>
+      <small>Secure payment via Gumroad. No monthly fees.</small>
+    </div>
+  </div>
+
+  <script>
+    // Simple QR Code Generator using qrious library
+    function loadQRious() {
+      return new Promise((resolve, reject) => {
+        if (typeof QRious !== 'undefined') {
+          resolve();
+          return;
+        }
+        
+        const script = document.createElement('script');
+        script.src = 'https://cdn.jsdelivr.net/npm/qrious@4.0.2/dist/qrious.min.js';
+        script.onload = resolve;
+        script.onerror = reject;
+        document.head.appendChild(script);
+      });
+    }
+
+    let qrInstance = null;
+
+    // Cookie Consent
+    if (!localStorage.getItem('cookiesAccepted')) {
+      document.getElementById('cookie-banner').style.display = 'block';
+    }
+
+    function acceptCookies() {
+      localStorage.setItem('cookiesAccepted', 'true');
+      document.getElementById('cookie-banner').style.display = 'none';
+    }
+
+    // Track events
+    function trackEvent(action, category, label) {
+      if (typeof gtag !== 'undefined') {
+        gtag('event', action, {
+          'event_category': category,
+          'event_label': label
+        });
+      }
+    }
+
+    async function generateLink() {
+      const phone = document.getElementById('phone').value.trim();
+      const message = document.getElementById('message').value.trim();
+
+      if (!phone) {
+        alert("Please enter a phone number");
+        return;
+      }
+
+      const encodedMsg = encodeURIComponent(message);
+      const link = `https://wa.me/${phone}${message ? `?text=${encodedMsg}` : ''}`;
+
+      document.getElementById('link-output').innerHTML = `
+        <p><strong>Generated Link:</strong></p>
+        <p><a href="${link}" target="_blank">${link}</a></p>
+      `;
+
+      // Generate QR Code
+      const qrDiv = document.getElementById('qr-code');
+      qrDiv.innerHTML = ''; // Clear previous QR code
+      
+      try {
+        // Load QRious library if not already loaded
+        await loadQRious();
+        
+        // Clear any existing QR code instance
+        if (qrInstance) {
+          qrInstance = null;
+        }
+        
+        // Create canvas element
+        const canvas = document.createElement('canvas');
+        qrDiv.appendChild(canvas);
+        
+        // Create new QR code with the actual WhatsApp link
+        qrInstance = new QRious({
+          element: canvas,
+          value: link,  // This is the key - encode the actual link
+          size: 200,
+          background: 'white',
+          foreground: 'black',
+          level: 'H'  // High error correction
+        });
+        
+        console.log('QR Code generated successfully for:', link);
+      } catch (error) {
+        console.error('QR Code generation error:', error);
+        qrDiv.innerHTML = '<p style="color: red;">Error generating QR code. Please try again.</p>';
+      }
+
+      // Track event
+      trackEvent('generate_link', 'Tool', 'WhatsApp Link Generated');
+    }
+
+    function copyLink() {
+      const linkElement = document.querySelector('#link-output a');
+      if (!linkElement) {
+        alert("Please generate a link first");
+        return;
+      }
+      
+      const link = linkElement.href;
+      
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(link).then(() => {
+          alert("Link copied to clipboard!");
+          trackEvent('copy_link', 'Tool', 'Link Copied');
+        }).catch(err => {
+          fallbackCopyTextToClipboard(link);
+        });
+      } else {
+        fallbackCopyTextToClipboard(link);
+      }
+    }
+
+    function fallbackCopyTextToClipboard(text) {
+      const textArea = document.createElement("textarea");
+      textArea.value = text;
+      textArea.style.top = "0";
+      textArea.style.left = "0";
+      textArea.style.position = "fixed";
+      textArea.style.opacity = "0";
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+      
+      try {
+        const successful = document.execCommand('copy');
+        if (successful) {
+          alert("Link copied to clipboard!");
+          trackEvent('copy_link', 'Tool', 'Link Copied');
+        } else {
+          alert("Failed to copy link");
+        }
+      } catch (err) {
+        alert("Failed to copy link");
+      }
+      
+      document.body.removeChild(textArea);
+    }
+
+    function downloadQR() {
+      const qrCanvas = document.querySelector('#qr-code canvas');
+      if (!qrCanvas) {
+        alert("Please generate a QR code first");
+        return;
+      }
+      
+      const link = document.createElement('a');
+      link.download = 'whatsapp-qr.png';
+      link.href = qrCanvas.toDataURL('image/png');
+      link.click();
+      trackEvent('download_qr', 'Tool', 'QR Code Downloaded');
+    }
+
+    function showPremiumModal(feature) {
+      const modal = document.getElementById('modal-overlay');
+      const text = document.getElementById('modal-text');
+      if (feature === 'logo') {
+        text.innerText = 'Add your logo to the QR code and download high-res files.';
+        trackEvent('premium_click', 'Premium', 'Logo Feature Clicked');
+      } else if (feature === 'svg') {
+        text.innerText = 'Download QR code as SVG for print-ready quality.';
+        trackEvent('premium_click', 'Premium', 'SVG Feature Clicked');
+      }
+      modal.style.display = 'block';
+    }
+
+    function trackPremiumClick() {
+      trackEvent('premium_upgrade_click', 'Premium', 'Upgrade Button Clicked');
+    }
+
+    function closeModal() {
+      document.getElementById('modal-overlay').style.display = 'none';
+    }
+
+    // Test QR library loading
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('Page loaded');
+    });
+  </script>
+</body>
+</html>
